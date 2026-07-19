@@ -1,6 +1,6 @@
 onetype.MiddlewareIntercept('boot', async (middleware) =>
 {
-	await work.boards.Fn('list');
+	await work.boards.Fn('sync');
 
 	await middleware.next();
 });

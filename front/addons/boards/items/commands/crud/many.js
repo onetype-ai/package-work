@@ -14,7 +14,7 @@ commands.Item({
 	},
 	callback: async function(properties, resolve)
 	{
-		const boards = await work.boards.Fn('list');
+		const boards = await work.boards.Fn('sync');
 
 		resolve({ boards });
 	}

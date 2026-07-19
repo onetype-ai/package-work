@@ -1,6 +1,6 @@
 onetype.AddonReady('work.boards', (boards) =>
 {
-	boards.Fn('list', async function()
+	boards.Fn('sync', async function()
 	{
 		const { data, message, code } = await $ot.command('work:boards:many', {}, true);
 
