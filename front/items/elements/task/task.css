@@ -517,10 +517,24 @@
 
 /* Textareas */
 
+.e-29e9295 form
+{
+	position: relative;
+}
+
+.e-29e9295 form > .send
+{
+	position: absolute;
+	right: var(--ot-spacing-s);
+	bottom: var(--ot-spacing-s);
+}
+
 .e-29e9295 textarea
 {
 	flex: 1;
+	width: 100%;
 	padding: var(--ot-spacing-s);
+	padding-right: 52px;
 	border: 1px solid var(--edge);
 	border-radius: var(--ot-radius-m);
 	background: var(--above);

@@ -433,7 +433,9 @@ onetype.AddonReady('elements', (elements) =>
 								</div>
 								<form class="reply" ot-submit.prevent="(payload) => respond(asked().id, payload)">
 									<textarea name="answer" rows="2" placeholder="Answer the question and unblock the work..."></textarea>
-									<e-form-button text="Answer" icon="send" color="orange" type="submit"></e-form-button>
+									<div class="send">
+										<e-form-button text="" icon="send" color="orange" :ot-tooltip="'Answer'" type="submit"></e-form-button>
+									</div>
 								</form>
 							</div>
 
@@ -484,12 +486,16 @@ onetype.AddonReady('elements', (elements) =>
 							</div>
 							<form ot-if="!entry.answer" class="reply" ot-submit.prevent="(payload) => respond(entry.id, payload)">
 								<textarea name="answer" rows="2" placeholder="Answer and unblock the work..."></textarea>
-								<e-form-button text="Answer" icon="send" color="orange" type="submit"></e-form-button>
+								<div class="send">
+									<e-form-button text="" icon="send" color="orange" :ot-tooltip="'Answer'" type="submit"></e-form-button>
+								</div>
 							</form>
 						</div>
 						<form class="composer" ot-submit.prevent="(payload) => ask(payload)">
 							<textarea name="question" rows="2" placeholder="Ask a question..."></textarea>
-							<e-form-button text="Ask" icon="contact_support" color="orange" type="submit"></e-form-button>
+							<div class="send">
+								<e-form-button text="" icon="contact_support" color="orange" :ot-tooltip="'Ask'" type="submit"></e-form-button>
+							</div>
 						</form>
 					</div>
 
@@ -504,7 +510,9 @@ onetype.AddonReady('elements', (elements) =>
 						</div>
 						<form class="composer" ot-submit.prevent="(payload) => comment(payload)">
 							<textarea name="comment" rows="2" placeholder="Write a comment..."></textarea>
-							<e-form-button text="Comment" icon="send" color="brand" type="submit"></e-form-button>
+							<div class="send">
+								<e-form-button text="" icon="send" color="brand" :ot-tooltip="'Comment'" type="submit"></e-form-button>
+							</div>
 						</form>
 					</div>
 				</div>
