@@ -187,7 +187,7 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div class="tabs">
-						<e-navigation-tabs :items="tabs()" :active="tab" tone="segmented" :stretch="true" :background="1" :_change="pick()"></e-navigation-tabs>
+						<e-navigation-tabs :items="tabs()" :active="tab" tone="segmented" :background="1" :_change="pick()"></e-navigation-tabs>
 					</div>
 
 					<div ot-if="tab === 'overview'" class="body">
