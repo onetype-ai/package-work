@@ -41,7 +41,7 @@ onetype.AddonReady('work', (work) =>
 				{ value: 'Planned', label: 'Planned', color: 'blue', create: true },
 				{ value: 'Working', label: 'Working', color: 'orange', create: true },
 				{ value: 'Review', label: 'Review', color: 'red', create: false },
-				{ value: 'Done', label: 'Done', color: 'green', create: false }
+				{ value: 'Done', label: 'Done', color: 'green', create: false, isFinal: true }
 			],
 			each: {
 				type: 'object',

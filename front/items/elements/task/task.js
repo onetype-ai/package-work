@@ -212,13 +212,24 @@ onetype.AddonReady('elements', (elements) =>
 				});
 			};
 
-			this.statuses = () =>
+			this.columns = () =>
 			{
 				const item = Object.values(work.boards.Items()).find((entry) => entry.Get('slug') === this.task.board);
 				const columns = item ? item.Get('columns') : [];
 
-				return columns.length ? columns.map((column) => ({ value: column.value, label: column.label ? column.label : column.value })) : Object.keys(this.colors).map((status) => ({ value: status, label: status }));
+				return columns.length ? columns : Object.keys(this.colors).map((status) => ({ value: status, label: status, isFinal: status === 'Done' }));
 			};
+
+			this.statuses = () => this.columns().map((column) => ({ value: column.value, label: column.label ? column.label : column.value }));
+
+			this.final = () =>
+			{
+				const column = this.columns().find((entry) => entry.isFinal);
+
+				return column ? column.value : 'Done';
+			};
+
+			this.finished = () => this.task.status === this.final();
 
 			this.move = () => ({ value }) =>
 			{
@@ -234,7 +245,7 @@ onetype.AddonReady('elements', (elements) =>
 					worked: since ? this.task.worked + Math.floor((Date.now() - since) / 1000) : this.task.worked,
 					locked_at: null,
 					working_since: null,
-					status: 'Done'
+					status: this.final()
 				});
 			};
 
@@ -339,9 +350,9 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div class="actions">
-						<e-form-button ot-if="!task.working_since && task.status !== 'Done'" text="Take this task" icon="front_hand" color="brand" :_click="() => take()"></e-form-button>
+						<e-form-button ot-if="!task.working_since && !finished()" text="Take this task" icon="front_hand" color="brand" :_click="() => take()"></e-form-button>
 						<e-form-button ot-if="task.working_since" text="Release" icon="outbound" color="green" tone="soft" :_click="() => release()"></e-form-button>
-						<e-form-button ot-if="task.status !== 'Done'" text="Complete" icon="check_circle" color="green" :_click="() => complete()"></e-form-button>
+						<e-form-button ot-if="!finished()" text="Complete" icon="check_circle" color="green" :_click="() => complete()"></e-form-button>
 						<div class="status">
 							<e-form-select :value="task.status" :options="statuses()" :searchable="false" :background="above()" :_change="move()"></e-form-select>
 						</div>

@@ -18,5 +18,10 @@ onetype.DataSchema('work.column', {
 		type: 'boolean',
 		value: true,
 		description: 'Whether new tasks may be created directly into this column.'
+	},
+	isFinal: {
+		type: 'boolean',
+		value: false,
+		description: 'Marks the column completed work lands in. One per board.'
 	}
 });
