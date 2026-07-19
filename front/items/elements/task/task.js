@@ -470,11 +470,11 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div ot-if="tab === 'questions'" class="body">
-						<e-data-thread :entries="questionEntries()" color="orange" waiting="Waiting for an answer" placeholder="Ask a question..." sendIcon="contact_support" replyPlaceholder="Answer and unblock the work..." emptyIcon="contact_support" emptyTitle="No questions yet" emptyDescription="When the work hits a wall, ask below." :background="0" :_send="({ value }) => ask(value)" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
+						<e-data-thread :entries="questionEntries()" color="orange" waiting="Waiting for an answer" placeholder="Ask a question..." sendIcon="contact_support" replyPlaceholder="Answer and unblock the work..." emptyIcon="contact_support" emptyTitle="No questions yet" emptyDescription="When the work hits a wall, ask below." :background="background" :_send="({ value }) => ask(value)" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
 					</div>
 
 					<div ot-if="tab === 'comments'" class="body">
-						<e-data-thread :entries="commentEntries()" placeholder="Write a comment..." emptyIcon="forum" emptyTitle="No comments yet" emptyDescription="Say the first word below." :background="0" :_send="({ value }) => comment(value)"></e-data-thread>
+						<e-data-thread :entries="commentEntries()" placeholder="Write a comment..." emptyIcon="forum" emptyTitle="No comments yet" emptyDescription="Say the first word below." :background="background" :_send="({ value }) => comment(value)"></e-data-thread>
 					</div>
 				</div>
 			`;
