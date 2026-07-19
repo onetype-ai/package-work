@@ -470,7 +470,7 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div ot-if="tab === 'questions'" class="body">
-						<e-data-thread :entries="questionEntries()" color="orange" waiting="Waiting for an answer" placeholder="Ask a question..." sendIcon="contact_support" replyPlaceholder="Answer and unblock the work..." emptyIcon="contact_support" emptyTitle="No questions yet" emptyDescription="When the work hits a wall, ask below." :background="background" :_send="({ value }) => ask(value)" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
+						<e-data-thread :entries="questionEntries()" color="orange" waiting="Waiting for an answer" placeholder="Ask a question..." replyPlaceholder="Answer and unblock the work..." emptyIcon="contact_support" emptyTitle="No questions yet" emptyDescription="When the work hits a wall, ask below." :background="background" :_send="({ value }) => ask(value)" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
 					</div>
 
 					<div ot-if="tab === 'comments'" class="body">
