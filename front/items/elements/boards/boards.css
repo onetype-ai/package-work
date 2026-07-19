@@ -1,0 +1,14 @@
+/* ===== WORK BOARDS ===== */
+
+.e-cc1c4b3
+{
+	display: block;
+	width: fit-content;
+}
+
+.e-cc1c4b3 > .box
+{
+	display: flex;
+	align-items: center;
+	gap: var(--ot-spacing-s);
+}
