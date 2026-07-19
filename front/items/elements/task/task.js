@@ -91,9 +91,11 @@ onetype.AddonReady('elements', (elements) =>
 				return this.format(this.task.worked + Math.floor((Date.now() - since) / 1000));
 			};
 
+			this.opened = () => this.task.questions.filter((question) => !question.answer);
+
 			this.asked = () =>
 			{
-				const open = this.task.questions.filter((question) => !question.answer);
+				const open = this.opened();
 
 				return open.length ? open[0] : null;
 			};
@@ -112,6 +114,7 @@ onetype.AddonReady('elements', (elements) =>
 				{ id: 'overview', label: 'Overview', icon: 'subject' },
 				{ id: 'assignee', label: 'Assignee', icon: 'person_pin_circle' },
 				{ id: 'settings', label: 'Settings', icon: 'tune' },
+				{ id: 'questions', label: 'Questions', icon: 'contact_support', count: this.opened().length },
 				{ id: 'comments', label: 'Comments', icon: 'forum', count: this.task.comments.length }
 			];
 
@@ -321,22 +324,35 @@ onetype.AddonReady('elements', (elements) =>
 				});
 			};
 
-			this.answer = ({ event }) =>
+			this.respond = (id, { event }) =>
 			{
 				const form = onetype.FormGet(event.target);
-				const question = this.asked();
 
-				if(!form.answer || !question)
+				if(!form.answer)
 				{
 					return;
 				}
 
-				const now = new Date().toLocaleString();
+				this.change({
+					...this.task,
+					questions: this.task.questions.map((entry) => entry.id === id ? { ...entry, answer: form.answer, answered_by: this.me(), answered_at: new Date().toLocaleString() } : entry)
+				});
+			};
+
+			this.ask = ({ event }) =>
+			{
+				const form = onetype.FormGet(event.target);
+
+				if(!form.question)
+				{
+					return;
+				}
+
+				event.target.reset();
 
 				this.change({
 					...this.task,
-					questions: this.task.questions.map((entry) => entry.id === question.id ? { ...entry, answer: form.answer, answered_by: this.me(), answered_at: now } : entry),
-					comments: [...this.task.comments, { id: 'now-' + this.task.comments.length, author: this.me(), text: form.answer, created_at: now }]
+					questions: [...this.task.questions, { id: 'now-' + this.task.questions.length, author: this.me(), text: form.question, answer: '', created_at: new Date().toLocaleString() }]
 				});
 			};
 
@@ -416,7 +432,7 @@ onetype.AddonReady('elements', (elements) =>
 										<span class="what">{{ asked().text }}</span>
 									</div>
 								</div>
-								<form class="reply" ot-submit.prevent="(payload) => answer(payload)">
+								<form class="reply" ot-submit.prevent="(payload) => respond(asked().id, payload)">
 									<textarea name="answer" rows="2" placeholder="Answer the question and unblock the work..."></textarea>
 									<e-form-button text="Answer" icon="send" color="orange" type="submit"></e-form-button>
 								</form>
@@ -445,6 +461,34 @@ onetype.AddonReady('elements', (elements) =>
 							<e-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-form-date>
 						</div>
 						<e-global-notice title="Schedule" :text="plan()" icon="event_upcoming" color="blue" :background="above()"></e-global-notice>
+					</div>
+
+					<div ot-if="tab === 'questions'" class="body">
+						<e-status-empty ot-if="!task.questions.length" icon="contact_support" title="No questions yet" description="When the work hits a wall, ask below." :background="0"></e-status-empty>
+						<div ot-for="entry in task.questions" :ot-key="entry.id" :class="entry.answer ? 'qa' : 'qa open'">
+							<div class="asked">
+								<span class="avatar">{{ initials(entry.author ? entry.author.name : '?') }}</span>
+								<div class="words">
+									<span class="row"><b>{{ entry.author ? entry.author.name : 'Unknown' }}</b><span class="when">{{ entry.created_at }}</span><span ot-if="!entry.answer" class="waits">Waiting for an answer</span></span>
+									<span class="text">{{ entry.text }}</span>
+								</div>
+							</div>
+							<div ot-if="entry.answer" class="answered">
+								<i>subdirectory_arrow_right</i>
+								<div class="words">
+									<span class="row"><b>{{ entry.answered_by ? entry.answered_by.name : 'Unknown' }}</b><span class="when">{{ entry.answered_at }}</span></span>
+									<span class="text">{{ entry.answer }}</span>
+								</div>
+							</div>
+							<form ot-if="!entry.answer" class="reply" ot-submit.prevent="(payload) => respond(entry.id, payload)">
+								<textarea name="answer" rows="2" placeholder="Answer and unblock the work..."></textarea>
+								<e-form-button text="Answer" icon="send" color="orange" type="submit"></e-form-button>
+							</form>
+						</div>
+						<form class="composer" ot-submit.prevent="(payload) => ask(payload)">
+							<textarea name="question" rows="2" placeholder="Ask a question..."></textarea>
+							<e-form-button text="Ask" icon="contact_support" color="orange" type="submit"></e-form-button>
+						</form>
 					</div>
 
 					<div ot-if="tab === 'comments'" class="body">
