@@ -59,7 +59,7 @@ onetype.AddonReady('elements', (elements) =>
 
 			return /* html */ `
 				<div class="box">
-					<e-navigation-tabs :items="boards()" :active="active" tone="segmented" :background="1" :_change="pick()"></e-navigation-tabs>
+					<e-navigation-tabs :items="boards()" :active="active" tone="contained" :background="1" :_change="pick()"></e-navigation-tabs>
 					<e-form-button text="" icon="add" color="brand" tone="ghost" :ot-tooltip="'Create a board'" :_click="() => add()"></e-form-button>
 				</div>
 			`;

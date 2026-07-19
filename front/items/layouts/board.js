@@ -16,7 +16,7 @@ onetype.AddonReady('ui.layouts', (layouts) =>
 			};
 
 			return /* html */ `
-				<div class="ot-container-full ot-py-l ot-dots ot-fill ot-flex-vertical">
+				<div class="ot-container-full ot-py-l ot-dots ot-fill ot-flex-vertical ot-gap-m">
 					<e-work-boards :active="board" :_change="pick()"></e-work-boards>
 					<e-work-board :board="board"></e-work-board>
 				</div>
