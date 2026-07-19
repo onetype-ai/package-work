@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"description": "The work layer of the instance. Tasks that humans and agents create, pick up and complete — one board, every worker.",
 	"icon": "view_kanban",
-	"color": "rgba(52, 211, 153, 1)",
+	"color": "rgba(251, 146, 60, 1)",
 	"core": ">=0.1.0",
 	"status": "enabled",
 	"depends": [],
