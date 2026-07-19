@@ -47,7 +47,7 @@ onetype.AddonReady('elements', (elements) =>
 
 			return /* html */ `
 				<e-views-board ot-if="columns().length" :field="'status'" :columns="columns()" :items="items" :background="2" :_open="open()" :_create="create()"></e-views-board>
-				<e-status-error ot-if="!columns().length" icon="view_kanban" title="Board is not configured" :description="'Board ' + board + ' has no columns declared, so there is nothing to draw. Give it columns to bring it to life.'" action="" :background="0"></e-status-error>
+				<e-status-error ot-if="!columns().length" icon="view_kanban" title="Board is not configured" :description="'Board ' + board + ' has no columns declared, so there is nothing to draw. Give it columns to bring it to life.'" :background="0"></e-status-error>
 			`;
 		}
 	});
