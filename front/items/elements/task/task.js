@@ -292,8 +292,15 @@ onetype.AddonReady('elements', (elements) =>
 				this.dismiss();
 			};
 
-			this.release = () =>
+			this.release = async () =>
 			{
+				const confirmed = await $ot.float.confirm('Release the task?', 'The session time lands in the total, the lock opens and the task moves to Review.');
+
+				if(!confirmed)
+				{
+					return;
+				}
+
 				const since = this.task.working_since ? new Date(this.task.working_since).getTime() : Date.now();
 
 				this.change({
