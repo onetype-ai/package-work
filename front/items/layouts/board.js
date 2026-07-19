@@ -9,7 +9,7 @@ onetype.AddonReady('ui.layouts', (layouts) =>
 		render: function()
 		{
 			return /* html */ `
-				<div class="ot-container-full ot-py-l ot-dots">
+				<div class="ot-container-full ot-py-l ot-dots ot-fill">
 					<e-work-board board="general"></e-work-board>
 				</div>
 			`;
