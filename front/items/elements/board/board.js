@@ -41,8 +41,13 @@ onetype.AddonReady('elements', (elements) =>
 				return value;
 			};
 
+			this.create = () => ({ value }) =>
+			{
+				return value;
+			};
+
 			return /* html */ `
-				<e-views-board :field="'status'" :columns="columns" :items="items" :background="2" :_open="open()"></e-views-board>
+				<e-views-board :field="'status'" :columns="columns" :items="items" :background="2" :_open="open()" :_create="create()"></e-views-board>
 			`;
 		}
 	});
