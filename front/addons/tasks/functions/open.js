@@ -2,7 +2,7 @@ onetype.AddonReady('work.tasks', (tasks) =>
 {
 	tasks.Fn('open', function(given)
 	{
-		const task = onetype.DataDefine({ created: given.date, ...given }, onetype.DataSchema('work.task'));
+		const task = onetype.DataDefine({ created_at: given.date, ...given }, onetype.DataSchema('work.task'));
 
 		return $ot.float.drawer({
 			id: 'work-task-' + task.id,
@@ -13,8 +13,9 @@ onetype.AddonReady('work.tasks', (tasks) =>
 			content: function()
 			{
 				this.task = task;
+				this.exit = () => this.dismiss();
 
-				return /* html */ `<e-work-task :task="task" :_close="close"></e-work-task>`;
+				return /* html */ `<e-work-task :task="task" :_close="exit"></e-work-task>`;
 			}
 		});
 	});
