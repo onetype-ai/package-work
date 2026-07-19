@@ -112,7 +112,6 @@ onetype.AddonReady('elements', (elements) =>
 
 			this.tabs = () => [
 				{ id: 'overview', label: 'Overview', icon: 'subject' },
-				{ id: 'assignee', label: 'Assignee', icon: 'person_pin_circle' },
 				{ id: 'settings', label: 'Settings', icon: 'tune' },
 				{ id: 'questions', label: 'Questions', icon: 'contact_support', count: this.opened().length },
 				{ id: 'comments', label: 'Comments', icon: 'forum', count: this.task.comments.length }
@@ -444,21 +443,24 @@ onetype.AddonReady('elements', (elements) =>
 						<e-data-details :items="details()" :background="above()"></e-data-details>
 					</div>
 
-					<div ot-if="tab === 'assignee'" class="body">
-						<span class="group">People</span>
-						<e-data-list :rows="peopleRows()" :search="true" placeholder="Find a person..." :background="above()"></e-data-list>
-						<span class="group">Agents</span>
-						<e-data-list :rows="agentRows()" :search="true" placeholder="Find an agent..." :background="above()"></e-data-list>
-					</div>
-
 					<div ot-if="tab === 'settings'" class="body">
 						<div class="scroll">
 							<span class="group">Priority</span>
 							<e-form-options :value="task.priority" :options="priorityOptions" :background="above()" :_change="prioritize()"></e-form-options>
-							<span class="group">Starts</span>
-							<e-form-date :value="task.schedule_start" :background="above()" :_change="start()"></e-form-date>
-							<span class="group">Ends</span>
-							<e-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-form-date>
+							<div class="dates">
+								<div class="date">
+									<span class="group">Starts</span>
+									<e-form-date :value="task.schedule_start" :background="above()" :_change="start()"></e-form-date>
+								</div>
+								<div class="date">
+									<span class="group">Ends</span>
+									<e-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-form-date>
+								</div>
+							</div>
+							<span class="group">People</span>
+							<e-data-list :rows="peopleRows()" :search="true" placeholder="Find a person..." :background="above()"></e-data-list>
+							<span class="group">Agents</span>
+							<e-data-list :rows="agentRows()" :search="true" placeholder="Find an agent..." :background="above()"></e-data-list>
 						</div>
 						<e-global-notice title="Schedule" :text="plan()" icon="event_upcoming" color="blue" :background="above()"></e-global-notice>
 					</div>
