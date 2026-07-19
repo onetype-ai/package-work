@@ -1,3 +1,5 @@
+import onetype from '@onetype/framework';
+
 onetype.DataSchema('work.task', {
 	id: {
 		type: 'string|number',
