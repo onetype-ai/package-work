@@ -40,9 +40,23 @@ onetype.AddonReady('elements', (elements) =>
 				$ot.work.tasks.open(value);
 			};
 
-			this.create = () => ({ value }) =>
+			this.create = () => async ({ value }) =>
 			{
-				return value;
+				const title = await $ot.float.confirm('Create a task in ' + value + '?', 'Give it a short, clear title.', { input: true, placeholder: 'Task title...', confirm: 'Create' });
+
+				if(!title)
+				{
+					return;
+				}
+
+				this.items = [...this.items, {
+					id: this.items.length + 1,
+					title: title,
+					description: '',
+					status: value,
+					author: { name: this.state.user && this.state.user.name ? this.state.user.name : 'You' },
+					date: new Date().toLocaleDateString()
+				}];
 			};
 
 			return /* html */ `
