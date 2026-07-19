@@ -111,7 +111,7 @@ onetype.AddonReady('elements', (elements) =>
 			this.tabs = () => [
 				{ id: 'overview', label: 'Overview', icon: 'subject' },
 				{ id: 'assignee', label: 'Assignee', icon: 'person_pin_circle' },
-				{ id: 'schedule', label: 'Schedule', icon: 'schedule' },
+				{ id: 'settings', label: 'Settings', icon: 'tune' },
 				{ id: 'comments', label: 'Comments', icon: 'forum', count: this.task.comments.length }
 			];
 
@@ -435,7 +435,7 @@ onetype.AddonReady('elements', (elements) =>
 						<e-data-list :rows="agentRows()" :search="true" placeholder="Find an agent..." :background="above()"></e-data-list>
 					</div>
 
-					<div ot-if="tab === 'schedule'" class="body">
+					<div ot-if="tab === 'settings'" class="body">
 						<span class="group">Priority</span>
 						<e-form-options :value="task.priority" :options="priorityOptions" :background="above()" :_change="prioritize()"></e-form-options>
 						<span class="group">Starts</span>
