@@ -93,13 +93,6 @@ onetype.AddonReady('elements', (elements) =>
 
 			this.opened = () => this.task.questions.filter((question) => !question.answer);
 
-			this.asked = () =>
-			{
-				const open = this.opened();
-
-				return open.length ? open[0] : null;
-			};
-
 			this.details = () => [
 				{ label: 'Status', value: this.task.status, type: 'status', color: this.color() },
 				{ label: 'Author', value: this.task.author ? this.task.author.name : null, type: 'person' },
@@ -339,6 +332,8 @@ onetype.AddonReady('elements', (elements) =>
 				});
 			};
 
+			this.openEntries = () => this.questionEntries().filter((entry) => !entry.reply).slice(0, 1);
+
 			this.questionEntries = () => this.task.questions.map((question) => ({
 				id: question.id,
 				author: question.author,
@@ -361,17 +356,6 @@ onetype.AddonReady('elements', (elements) =>
 					...this.task,
 					comments: [...this.task.comments, { id: 'now-' + this.task.comments.length, author: this.me(), text: text, created_at: new Date().toLocaleString() }]
 				});
-			};
-
-			this.banner = ({ event }) =>
-			{
-				const form = onetype.FormGet(event.target);
-				const question = this.asked();
-
-				if(form.answer && question)
-				{
-					this.respond(question.id, form.answer);
-				}
 			};
 
 			this.dismiss = () =>
@@ -425,21 +409,7 @@ onetype.AddonReady('elements', (elements) =>
 
 					<div ot-if="tab === 'overview'" class="body overview">
 						<div class="scroll">
-							<div ot-if="asked()" class="question">
-								<div class="ask">
-									<i>contact_support</i>
-									<div class="words">
-										<span class="who">{{ asked().author ? asked().author.name : 'Somebody' }} asks · {{ asked().created_at }}</span>
-										<span class="what">{{ asked().text }}</span>
-									</div>
-								</div>
-								<form class="reply" ot-submit.prevent="(payload) => banner(payload)">
-									<textarea name="answer" rows="2" placeholder="Answer the question and unblock the work..."></textarea>
-									<div class="send">
-										<e-form-button text="" icon="send" color="orange" :ot-tooltip="'Answer'" type="submit"></e-form-button>
-									</div>
-								</form>
-							</div>
+							<e-data-thread ot-if="openEntries().length" :entries="openEntries()" color="orange" waiting="Waiting for an answer" replyPlaceholder="Answer the question and unblock the work..." :background="background" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
 
 							<e-global-markdown :content="task.description" :background="0"></e-global-markdown>
 						</div>

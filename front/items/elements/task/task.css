@@ -281,61 +281,6 @@
 	overflow-y: auto;
 }
 
-/* Question */
-
-.e-29e9295 > .box > .body > .scroll > .question
-{
-	display: flex;
-	flex-direction: column;
-	gap: var(--ot-spacing-s);
-	padding: var(--ot-spacing-m);
-	border: 1px solid var(--ot-orange-border);
-	border-radius: var(--ot-radius-l);
-	background: var(--ot-orange-opacity);
-}
-
-.e-29e9295 > .box > .body > .scroll > .question > .ask
-{
-	display: flex;
-	gap: var(--ot-spacing-s);
-}
-
-.e-29e9295 > .box > .body > .scroll > .question > .ask > i
-{
-	font-size: 20px;
-	color: var(--ot-orange);
-}
-
-.e-29e9295 > .box > .body > .scroll > .question > .ask > .words
-{
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-}
-
-.e-29e9295 > .box > .body > .scroll > .question > .ask > .words > .who
-{
-	font-size: 11px;
-	font-weight: 600;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	color: var(--ot-orange);
-}
-
-.e-29e9295 > .box > .body > .scroll > .question > .ask > .words > .what
-{
-	font-size: 13px;
-	line-height: 1.5;
-	color: var(--ot-text-1);
-}
-
-.e-29e9295 > .box > .body > .scroll > .question > .reply
-{
-	display: flex;
-	align-items: flex-end;
-	gap: var(--ot-spacing-s);
-}
-
 /* Groups */
 
 .e-29e9295 > .box > .body > .group,
