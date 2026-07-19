@@ -223,6 +223,11 @@
 	padding: var(--ot-spacing-m);
 }
 
+.e-29e9295 > .box > .actions > .status
+{
+	width: 150px;
+}
+
 .e-29e9295 > .box > .actions > .worked
 {
 	display: inline-flex;

@@ -46,6 +46,10 @@ onetype.AddonReady('elements', (elements) =>
 				type: 'function',
 				description: 'Called without payload when the panel asks to close.'
 			},
+			_delete: {
+				type: 'function',
+				description: 'Called with { value } holding the task after the user confirms deletion.'
+			},
 			_change: {
 				type: 'function',
 				description: 'Called with { value } holding the task after any change made inside the panel.'
@@ -208,6 +212,49 @@ onetype.AddonReady('elements', (elements) =>
 				});
 			};
 
+			this.statuses = () =>
+			{
+				const item = Object.values(work.boards.Items()).find((entry) => entry.Get('slug') === this.task.board);
+				const columns = item ? item.Get('columns') : [];
+
+				return columns.length ? columns.map((column) => ({ value: column.value, label: column.label ? column.label : column.value })) : Object.keys(this.colors).map((status) => ({ value: status, label: status }));
+			};
+
+			this.move = () => ({ value }) =>
+			{
+				this.change({ ...this.task, status: value });
+			};
+
+			this.complete = () =>
+			{
+				const since = this.task.working_since ? new Date(this.task.working_since).getTime() : null;
+
+				this.change({
+					...this.task,
+					worked: since ? this.task.worked + Math.floor((Date.now() - since) / 1000) : this.task.worked,
+					locked_at: null,
+					working_since: null,
+					status: 'Done'
+				});
+			};
+
+			this.remove = async () =>
+			{
+				const confirmed = await $ot.float.confirm('Delete task?', 'The task and its comments disappear from the board for everyone.', { type: 'danger' });
+
+				if(!confirmed)
+				{
+					return;
+				}
+
+				if(this._delete)
+				{
+					this._delete({ value: this.task });
+				}
+
+				this.dismiss();
+			};
+
 			this.release = () =>
 			{
 				const since = this.task.working_since ? new Date(this.task.working_since).getTime() : Date.now();
@@ -292,9 +339,14 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div class="actions">
-						<e-form-button ot-if="!task.working_since" text="Take this task" icon="front_hand" color="brand" :_click="() => take()"></e-form-button>
+						<e-form-button ot-if="!task.working_since && task.status !== 'Done'" text="Take this task" icon="front_hand" color="brand" :_click="() => take()"></e-form-button>
 						<e-form-button ot-if="task.working_since" text="Release" icon="outbound" color="green" tone="soft" :_click="() => release()"></e-form-button>
+						<e-form-button ot-if="task.status !== 'Done'" text="Complete" icon="check_circle" color="green" :_click="() => complete()"></e-form-button>
+						<div class="status">
+							<e-form-select :value="task.status" :options="statuses()" :searchable="false" :background="above()" :_change="move()"></e-form-select>
+						</div>
 						<span ot-if="task.worked || task.working_since" class="worked" :ot-tooltip="'Time worked in total'"><i>timer</i>{{ elapsed() }}</span>
+						<e-form-button text="" icon="delete" color="red" tone="ghost" :_click="() => remove()"></e-form-button>
 					</div>
 
 					<div class="tabs">
