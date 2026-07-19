@@ -14,7 +14,7 @@ onetype.DataSchema('work.column', {
 		options: ['brand', 'blue', 'red', 'orange', 'green'],
 		description: 'Column accent color.'
 	},
-	create: {
+	canCreate: {
 		type: 'boolean',
 		value: true,
 		description: 'Whether new tasks may be created directly into this column.'

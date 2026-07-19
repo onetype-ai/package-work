@@ -37,11 +37,11 @@ onetype.AddonReady('work', (work) =>
 		addon.Field('columns', {
 			type: 'array',
 			value: [
-				{ value: 'Backlog', label: 'Backlog', color: 'brand', create: true },
-				{ value: 'Planned', label: 'Planned', color: 'blue', create: true },
-				{ value: 'Working', label: 'Working', color: 'orange', create: true },
-				{ value: 'Review', label: 'Review', color: 'red', create: false },
-				{ value: 'Done', label: 'Done', color: 'green', create: false, isFinal: true }
+				{ value: 'Backlog', label: 'Backlog', color: 'brand', canCreate: true },
+				{ value: 'Planned', label: 'Planned', color: 'blue', canCreate: true },
+				{ value: 'Working', label: 'Working', color: 'orange', canCreate: true },
+				{ value: 'Review', label: 'Review', color: 'red', canCreate: false },
+				{ value: 'Done', label: 'Done', color: 'green', canCreate: false, isFinal: true }
 			],
 			each: {
 				type: 'object',
