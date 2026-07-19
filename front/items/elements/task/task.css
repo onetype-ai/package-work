@@ -357,16 +357,6 @@
 
 /* Comments */
 
-.e-29e9295 > .box > .body > .quiet
-{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: var(--ot-spacing-l);
-	font-size: 13px;
-	color: var(--ot-text-3);
-}
-
 .e-29e9295 > .box > .body > .comment
 {
 	display: flex;

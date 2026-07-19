@@ -448,7 +448,7 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div ot-if="tab === 'comments'" class="body">
-						<div ot-if="!task.comments.length" class="quiet">No comments yet. Say the first word.</div>
+						<e-status-empty ot-if="!task.comments.length" icon="forum" title="No comments yet" description="Say the first word below." :background="0"></e-status-empty>
 						<div ot-for="entry in task.comments" class="comment">
 							<span class="avatar">{{ initials(entry.author ? entry.author.name : '?') }}</span>
 							<div class="bubble">
