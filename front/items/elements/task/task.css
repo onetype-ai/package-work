@@ -265,12 +265,13 @@
 	overflow-y: auto;
 }
 
-.e-29e9295 > .box > .body.overview
+.e-29e9295 > .box > .body.overview,
+.e-29e9295 > .box > .body:has(> .scroll)
 {
 	overflow: hidden;
 }
 
-.e-29e9295 > .box > .body.overview > .scroll
+.e-29e9295 > .box > .body > .scroll
 {
 	display: flex;
 	flex-direction: column;
@@ -337,7 +338,8 @@
 
 /* Groups */
 
-.e-29e9295 > .box > .body > .group
+.e-29e9295 > .box > .body > .group,
+.e-29e9295 > .box > .body > .scroll > .group
 {
 	font-size: 11px;
 	font-weight: 600;
@@ -347,7 +349,8 @@
 	margin-top: var(--ot-spacing-s);
 }
 
-.e-29e9295 > .box > .body > .group:first-child
+.e-29e9295 > .box > .body > .group:first-child,
+.e-29e9295 > .box > .body > .scroll > .group:first-child
 {
 	margin-top: 0;
 }

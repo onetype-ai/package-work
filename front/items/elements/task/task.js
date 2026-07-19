@@ -436,12 +436,14 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div ot-if="tab === 'settings'" class="body">
-						<span class="group">Priority</span>
-						<e-form-options :value="task.priority" :options="priorityOptions" :background="above()" :_change="prioritize()"></e-form-options>
-						<span class="group">Starts</span>
-						<e-form-date :value="task.schedule_start" :background="above()" :_change="start()"></e-form-date>
-						<span class="group">Ends</span>
-						<e-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-form-date>
+						<div class="scroll">
+							<span class="group">Priority</span>
+							<e-form-options :value="task.priority" :options="priorityOptions" :background="above()" :_change="prioritize()"></e-form-options>
+							<span class="group">Starts</span>
+							<e-form-date :value="task.schedule_start" :background="above()" :_change="start()"></e-form-date>
+							<span class="group">Ends</span>
+							<e-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-form-date>
+						</div>
 						<e-global-notice title="Schedule" :text="plan()" icon="event_upcoming" color="blue" :background="above()"></e-global-notice>
 					</div>
 
