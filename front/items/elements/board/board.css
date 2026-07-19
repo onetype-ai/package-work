@@ -3,3 +3,16 @@
 	width: 100%;
 	height: 100%;
 }
+
+.e-522b4c40 > .split {
+	display: grid;
+	grid-template-columns: 260px 1fr;
+	gap: var(--ot-spacing-m);
+	align-items: start;
+	width: 100%;
+	height: 100%;
+}
+
+.e-522b4c40 > .split > .main {
+	min-width: 0;
+}
