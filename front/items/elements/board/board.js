@@ -37,7 +37,7 @@ onetype.AddonReady('elements', (elements) =>
 
 			this.open = () => ({ value }) =>
 			{
-				return value;
+				$ot.work.tasks.open(value);
 			};
 
 			this.create = () => ({ value }) =>

@@ -5,5 +5,8 @@ $ot.work = {
 		create: (properties) => $ot.command('work:boards:create', properties),
 		update: (properties) => $ot.command('work:boards:update', properties),
 		delete: (slug) => $ot.command('work:boards:delete', { slug })
+	},
+	tasks: {
+		open: (task) => work.tasks.Fn('open', task)
 	}
 };
