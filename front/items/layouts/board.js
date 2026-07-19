@@ -8,7 +8,7 @@ onetype.AddonReady('ui.layouts', (layouts) =>
 		slot: 'center',
 		render: function()
 		{
-			return `<div>Work is here. The board comes next.</div>`;
+			return `<e-work-board board="general"></e-work-board>`;
 		}
 	});
 });
