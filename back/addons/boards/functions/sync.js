@@ -26,11 +26,7 @@ work.boards.Fn('sync', async function()
 	{
 		const item = seen[row.Get('slug')];
 
-		if(item)
-		{
-			item.Set('id', row.Get('id'), false);
-		}
-		else
+		if(!item)
 		{
 			this.Item({
 				id: row.Get('id'),

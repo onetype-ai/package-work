@@ -3,6 +3,7 @@ import onetype from '@onetype/framework';
 onetype.AddonReady('work.boards', (boards) =>
 {
 	boards.Item({
+		id: 'general',
 		slug: 'general',
 		name: 'General',
 		icon: 'space_dashboard',

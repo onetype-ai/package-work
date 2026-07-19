@@ -46,14 +46,16 @@ commands.Item({
 			return resolve(null, 'Board ' + slug + ' already exists.', 400);
 		}
 
-		const item = work.boards.Item({
+		const item = work.boards.ItemAdd({
 			slug: slug,
 			name: properties.name,
 			icon: properties.icon,
 			description: properties.description
-		});
+		}, null, true, false);
 
 		await item.Create();
+
+		await work.boards.Fn('sync');
 
 		const board = {
 			slug: item.Get('slug'),

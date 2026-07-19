@@ -45,7 +45,7 @@ commands.Item({
 			return resolve(null, 'Board ' + properties.slug + ' not found.', 404);
 		}
 
-		if(!item.Get('id'))
+		if(item.Get('id') === item.Get('slug'))
 		{
 			return resolve(null, 'Board ' + properties.slug + ' is declared by a package and cannot be changed.', 400);
 		}

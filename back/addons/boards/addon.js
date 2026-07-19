@@ -8,7 +8,7 @@ onetype.AddonReady('work', (work) =>
 
 		addon.Field('id', {
 			type: 'string',
-			description: 'Database row id once stored. Empty for boards declared by packages.'
+			description: 'Board id. The slug itself for boards declared by packages, the database row id for stored ones.'
 		});
 
 		addon.Field('slug', {

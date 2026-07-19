@@ -8,7 +8,7 @@ work.boards.Fn('list', function()
 		icon: item.Get('icon'),
 		description: item.Get('description'),
 		order: item.Get('order'),
-		isSystem: !item.Get('id')
+		isSystem: item.Get('id') === item.Get('slug')
 	}));
 
 	return boards.sort((first, second) => first.order - second.order || first.name.localeCompare(second.name));
