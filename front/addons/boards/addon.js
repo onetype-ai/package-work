@@ -25,6 +25,17 @@ onetype.AddonReady('work', (work) =>
 			description: 'One line about what kind of work lives on this board.'
 		});
 
+		addon.Field('columns', {
+			type: 'array',
+			value: [],
+			each: {
+				type: 'object',
+				config: 'work.column',
+				description: 'A single column of the board.'
+			},
+			description: 'Columns of the board left to right, each collecting tasks of one status.'
+		});
+
 		addon.Field('order', {
 			type: 'number',
 			value: 100,

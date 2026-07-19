@@ -47,6 +47,7 @@ commands.Item({
 			name: item.Get('name'),
 			icon: item.Get('icon'),
 			description: item.Get('description'),
+			columns: item.Get('columns'),
 			order: item.Get('order'),
 			isSystem: false
 		};

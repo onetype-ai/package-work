@@ -7,6 +7,7 @@ work.boards.Fn('list', function()
 		name: item.Get('name'),
 		icon: item.Get('icon'),
 		description: item.Get('description'),
+		columns: item.Get('columns'),
 		order: item.Get('order'),
 		isSystem: item.Get('id') === item.Get('slug')
 	}));

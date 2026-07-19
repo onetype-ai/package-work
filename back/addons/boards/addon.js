@@ -34,6 +34,23 @@ onetype.AddonReady('work', (work) =>
 			description: 'One line about what kind of work lives on this board.'
 		});
 
+		addon.Field('columns', {
+			type: 'array',
+			value: [
+				{ value: 'Backlog', label: 'Backlog', color: 'brand', create: true },
+				{ value: 'Planned', label: 'Planned', color: 'blue', create: true },
+				{ value: 'Working', label: 'Working', color: 'orange', create: true },
+				{ value: 'Review', label: 'Review', color: 'red', create: false },
+				{ value: 'Done', label: 'Done', color: 'green', create: false }
+			],
+			each: {
+				type: 'object',
+				config: 'work.column',
+				description: 'A single column of the board.'
+			},
+			description: 'Columns of the board left to right, each collecting tasks of one status.'
+		});
+
 		addon.Field('order', {
 			type: 'number',
 			value: 100,
@@ -60,6 +77,7 @@ onetype.AddonReady('work', (work) =>
 		addon.Schema('name varchar(255) not null');
 		addon.Schema('icon varchar(255)');
 		addon.Schema('description text');
+		addon.Schema('columns jsonb');
 		addon.Schema('updated_at timestamptz');
 		addon.Schema('created_at timestamptz not null default now()');
 		addon.Schema('deleted_at timestamptz');

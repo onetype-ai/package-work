@@ -33,7 +33,8 @@ work.boards.Fn('sync', async function()
 				slug: row.Get('slug'),
 				name: row.Get('name'),
 				icon: row.Get('icon'),
-				description: row.Get('description')
+				description: row.Get('description'),
+				columns: row.Get('columns')
 			});
 		}
 	}

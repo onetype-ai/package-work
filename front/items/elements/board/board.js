@@ -17,13 +17,12 @@ onetype.AddonReady('elements', (elements) =>
 		},
 		render: function()
 		{
-			this.columns = [
-				{ value: 'Backlog', label: 'Backlog', color: 'brand' },
-				{ value: 'Planned', label: 'Planned', color: 'blue' },
-				{ value: 'Working', label: 'Working', color: 'orange' },
-				{ value: 'Review', label: 'Review', color: 'red', create: false },
-				{ value: 'Done', label: 'Done', color: 'green', create: false }
-			];
+			this.columns = () =>
+			{
+				const item = Object.values(work.boards.Items()).find((entry) => entry.Get('slug') === this.board);
+
+				return item ? item.Get('columns') : [];
+			};
 
 			this.items = [
 				{ id: 1, title: 'Design the task schema', description: 'Fields, statuses and the assignee model for work.tasks.', status: 'Done', author: { name: 'Dejan Tomić' }, date: 'Jul 15' },
@@ -47,7 +46,7 @@ onetype.AddonReady('elements', (elements) =>
 			};
 
 			return /* html */ `
-				<e-views-board :field="'status'" :columns="columns" :items="items" :background="2" :_open="open()" :_create="create()"></e-views-board>
+				<e-views-board :field="'status'" :columns="columns()" :items="items" :background="2" :_open="open()" :_create="create()"></e-views-board>
 			`;
 		}
 	});

@@ -1,6 +1,7 @@
 import '#work/addons/boards/addon.js';
 
 /* Core */
+import '#work/addons/boards/core/schemas/column.js';
 import '#work/addons/boards/core/schemas/board.js';
 import '#work/addons/boards/core/emitters/create.js';
 import '#work/addons/boards/core/emitters/update.js';

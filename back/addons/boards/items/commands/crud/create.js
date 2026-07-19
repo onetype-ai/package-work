@@ -34,6 +34,15 @@ commands.Item({
 		description: {
 			type: 'string',
 			description: 'One line about what kind of work lives on this board.'
+		},
+		columns: {
+			type: 'array',
+			each: {
+				type: 'object',
+				config: 'work.column',
+				description: 'A single column of the board.'
+			},
+			description: 'Columns of the board. Omitted takes the standard status columns.'
 		}
 	},
 	out: 'work.board',
@@ -50,7 +59,8 @@ commands.Item({
 			slug: slug,
 			name: properties.name,
 			icon: properties.icon,
-			description: properties.description
+			description: properties.description,
+			columns: properties.columns
 		}, null, true, false);
 
 		await item.Create();
@@ -62,6 +72,7 @@ commands.Item({
 			name: item.Get('name'),
 			icon: item.Get('icon'),
 			description: item.Get('description'),
+			columns: item.Get('columns'),
 			order: item.Get('order'),
 			isSystem: false
 		};

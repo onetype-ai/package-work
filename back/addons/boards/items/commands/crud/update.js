@@ -33,6 +33,15 @@ commands.Item({
 		description: {
 			type: 'string',
 			description: 'New description for the board.'
+		},
+		columns: {
+			type: 'array',
+			each: {
+				type: 'object',
+				config: 'work.column',
+				description: 'A single column of the board.'
+			},
+			description: 'New columns of the board.'
 		}
 	},
 	out: 'work.board',
@@ -52,7 +61,7 @@ commands.Item({
 
 		const whitelist = [];
 
-		for(const field of ['name', 'icon', 'description'])
+		for(const field of ['name', 'icon', 'description', 'columns'])
 		{
 			if(properties[field] !== null && properties[field] !== undefined)
 			{
@@ -73,6 +82,7 @@ commands.Item({
 			name: item.Get('name'),
 			icon: item.Get('icon'),
 			description: item.Get('description'),
+			columns: item.Get('columns'),
 			order: item.Get('order'),
 			isSystem: false
 		};
