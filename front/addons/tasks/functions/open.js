@@ -2,20 +2,7 @@ onetype.AddonReady('work.tasks', (tasks) =>
 {
 	tasks.Fn('open', function(given)
 	{
-		const task = {
-			board: given.board ? given.board : 'general',
-			description: '',
-			status: 'Backlog',
-			author: null,
-			assignee: null,
-			created: given.created ? given.created : (given.date ? given.date : ''),
-			worked: 0,
-			locked: null,
-			working: null,
-			question: null,
-			comments: [],
-			...given
-		};
+		const task = onetype.DataDefine({ created: given.date, ...given }, onetype.DataSchema('work.task'));
 
 		return $ot.float.drawer({
 			id: 'work-task-' + task.id,

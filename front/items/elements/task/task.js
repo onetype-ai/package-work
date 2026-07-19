@@ -11,6 +11,7 @@ onetype.AddonReady('elements', (elements) =>
 		config: {
 			task: {
 				type: 'object',
+				config: 'work.task',
 				value: {
 					id: 3,
 					board: 'general',
