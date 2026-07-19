@@ -8,7 +8,11 @@ onetype.AddonReady('ui.layouts', (layouts) =>
 		slot: 'center',
 		render: function()
 		{
-			return `<e-work-board board="general"></e-work-board>`;
+			return /* html */ `
+				<div class="ot-container-full ot-py-l">
+					<e-work-board board="general"></e-work-board>
+				</div>
+			`;
 		}
 	});
 });
