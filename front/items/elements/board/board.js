@@ -21,8 +21,8 @@ onetype.AddonReady('elements', (elements) =>
 				{ value: 'Backlog', label: 'Backlog', color: 'brand' },
 				{ value: 'Planned', label: 'Planned', color: 'blue' },
 				{ value: 'Working', label: 'Working', color: 'orange' },
-				{ value: 'Review', label: 'Review', color: 'red' },
-				{ value: 'Done', label: 'Done', color: 'green' }
+				{ value: 'Review', label: 'Review', color: 'red', create: false },
+				{ value: 'Done', label: 'Done', color: 'green', create: false }
 			];
 
 			this.items = [
