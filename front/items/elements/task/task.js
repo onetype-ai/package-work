@@ -323,53 +323,55 @@ onetype.AddonReady('elements', (elements) =>
 				});
 			};
 
-			this.respond = (id, { event }) =>
+			this.respond = (id, answer) =>
 			{
-				const form = onetype.FormGet(event.target);
-
-				if(!form.answer)
-				{
-					return;
-				}
-
 				this.change({
 					...this.task,
-					questions: this.task.questions.map((entry) => entry.id === id ? { ...entry, answer: form.answer, answered_by: this.me(), answered_at: new Date().toLocaleString() } : entry)
+					questions: this.task.questions.map((entry) => entry.id === id ? { ...entry, answer: answer, answered_by: this.me(), answered_at: new Date().toLocaleString() } : entry)
 				});
 			};
 
-			this.ask = ({ event }) =>
+			this.ask = (text) =>
 			{
-				const form = onetype.FormGet(event.target);
-
-				if(!form.question)
-				{
-					return;
-				}
-
-				event.target.reset();
-
 				this.change({
 					...this.task,
-					questions: [...this.task.questions, { id: 'now-' + this.task.questions.length, author: this.me(), text: form.question, answer: '', created_at: new Date().toLocaleString() }]
+					questions: [...this.task.questions, { id: 'now-' + this.task.questions.length, author: this.me(), text: text, answer: '', created_at: new Date().toLocaleString() }]
 				});
 			};
 
-			this.comment = ({ event }) =>
+			this.questionEntries = () => this.task.questions.map((question) => ({
+				id: question.id,
+				author: question.author,
+				at: question.created_at,
+				text: question.text,
+				replyable: true,
+				reply: question.answer ? { author: question.answered_by, at: question.answered_at, text: question.answer } : null
+			}));
+
+			this.commentEntries = () => this.task.comments.map((comment) => ({
+				id: comment.id,
+				author: comment.author,
+				at: comment.created_at,
+				text: comment.text
+			}));
+
+			this.comment = (text) =>
 			{
-				const form = onetype.FormGet(event.target);
-
-				if(!form.comment)
-				{
-					return;
-				}
-
-				event.target.reset();
-
 				this.change({
 					...this.task,
-					comments: [...this.task.comments, { id: 'now-' + this.task.comments.length, author: this.me(), text: form.comment, created_at: new Date().toLocaleString() }]
+					comments: [...this.task.comments, { id: 'now-' + this.task.comments.length, author: this.me(), text: text, created_at: new Date().toLocaleString() }]
 				});
+			};
+
+			this.banner = ({ event }) =>
+			{
+				const form = onetype.FormGet(event.target);
+				const question = this.asked();
+
+				if(form.answer && question)
+				{
+					this.respond(question.id, form.answer);
+				}
 			};
 
 			this.dismiss = () =>
@@ -431,7 +433,7 @@ onetype.AddonReady('elements', (elements) =>
 										<span class="what">{{ asked().text }}</span>
 									</div>
 								</div>
-								<form class="reply" ot-submit.prevent="(payload) => respond(asked().id, payload)">
+								<form class="reply" ot-submit.prevent="(payload) => banner(payload)">
 									<textarea name="answer" rows="2" placeholder="Answer the question and unblock the work..."></textarea>
 									<div class="send">
 										<e-form-button text="" icon="send" color="orange" :ot-tooltip="'Answer'" type="submit"></e-form-button>
@@ -468,52 +470,11 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div ot-if="tab === 'questions'" class="body">
-						<e-status-empty ot-if="!task.questions.length" icon="contact_support" title="No questions yet" description="When the work hits a wall, ask below." :background="0"></e-status-empty>
-						<div ot-for="entry in task.questions" :ot-key="entry.id" :class="entry.answer ? 'qa' : 'qa open'">
-							<div class="asked">
-								<span class="avatar">{{ initials(entry.author ? entry.author.name : '?') }}</span>
-								<div class="words">
-									<span class="row"><b>{{ entry.author ? entry.author.name : 'Unknown' }}</b><span class="when">{{ entry.created_at }}</span><span ot-if="!entry.answer" class="waits">Waiting for an answer</span></span>
-									<span class="text">{{ entry.text }}</span>
-								</div>
-							</div>
-							<div ot-if="entry.answer" class="answered">
-								<i>subdirectory_arrow_right</i>
-								<div class="words">
-									<span class="row"><b>{{ entry.answered_by ? entry.answered_by.name : 'Unknown' }}</b><span class="when">{{ entry.answered_at }}</span></span>
-									<span class="text">{{ entry.answer }}</span>
-								</div>
-							</div>
-							<form ot-if="!entry.answer" class="reply" ot-submit.prevent="(payload) => respond(entry.id, payload)">
-								<textarea name="answer" rows="2" placeholder="Answer and unblock the work..."></textarea>
-								<div class="send">
-									<e-form-button text="" icon="send" color="orange" :ot-tooltip="'Answer'" type="submit"></e-form-button>
-								</div>
-							</form>
-						</div>
-						<form class="composer" ot-submit.prevent="(payload) => ask(payload)">
-							<textarea name="question" rows="2" placeholder="Ask a question..."></textarea>
-							<div class="send">
-								<e-form-button text="" icon="contact_support" color="orange" :ot-tooltip="'Ask'" type="submit"></e-form-button>
-							</div>
-						</form>
+						<e-data-thread :entries="questionEntries()" color="orange" waiting="Waiting for an answer" placeholder="Ask a question..." sendIcon="contact_support" replyPlaceholder="Answer and unblock the work..." emptyIcon="contact_support" emptyTitle="No questions yet" emptyDescription="When the work hits a wall, ask below." :background="0" :_send="({ value }) => ask(value)" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
 					</div>
 
 					<div ot-if="tab === 'comments'" class="body">
-						<e-status-empty ot-if="!task.comments.length" icon="forum" title="No comments yet" description="Say the first word below." :background="0"></e-status-empty>
-						<div ot-for="entry in task.comments" class="comment">
-							<span class="avatar">{{ initials(entry.author ? entry.author.name : '?') }}</span>
-							<div class="bubble">
-								<span class="row"><b>{{ entry.author ? entry.author.name : 'Unknown' }}</b><span class="when">{{ entry.created_at }}</span></span>
-								<span class="text">{{ entry.text }}</span>
-							</div>
-						</div>
-						<form class="composer" ot-submit.prevent="(payload) => comment(payload)">
-							<textarea name="comment" rows="2" placeholder="Write a comment..."></textarea>
-							<div class="send">
-								<e-form-button text="" icon="send" color="brand" :ot-tooltip="'Comment'" type="submit"></e-form-button>
-							</div>
-						</form>
+						<e-data-thread :entries="commentEntries()" placeholder="Write a comment..." emptyIcon="forum" emptyTitle="No comments yet" emptyDescription="Say the first word below." :background="0" :_send="({ value }) => comment(value)"></e-data-thread>
 					</div>
 				</div>
 			`;
