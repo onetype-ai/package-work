@@ -73,16 +73,21 @@ onetype.AddonReady('work', (work) =>
 			description: 'Seconds of work accumulated over released sessions.'
 		});
 
+		addon.Field('priority', {
+			type: 'string',
+			value: 'Normal',
+			options: ['Low', 'Normal', 'High', 'Urgent'],
+			description: 'How urgent the task is.'
+		});
+
 		addon.Field('schedule_start', {
 			type: 'string',
 			description: 'When the task starts. Null starts on take.'
 		});
 
-		addon.Field('schedule_repeat', {
+		addon.Field('schedule_end', {
 			type: 'string',
-			value: 'none',
-			options: ['none', 'hourly', 'daily', 'weekly'],
-			description: 'How often the task repeats after its start.'
+			description: 'When the task is due. Null means no deadline.'
 		});
 
 		addon.Field('updated_at', {
@@ -112,8 +117,9 @@ onetype.AddonReady('work', (work) =>
 		addon.Schema('locked_at timestamptz');
 		addon.Schema('working_since timestamptz');
 		addon.Schema('worked bigint not null default 0');
+		addon.Schema("priority varchar(255) not null default 'Normal'");
 		addon.Schema('schedule_start timestamptz');
-		addon.Schema("schedule_repeat varchar(255) not null default 'none'");
+		addon.Schema('schedule_end timestamptz');
 		addon.Schema('updated_at timestamptz');
 		addon.Schema('created_at timestamptz not null default now()');
 		addon.Schema('deleted_at timestamptz');

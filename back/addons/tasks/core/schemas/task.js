@@ -49,15 +49,19 @@ onetype.DataSchema('work.task', {
 		value: 0,
 		description: 'Seconds of work accumulated over released sessions.'
 	},
+	priority: {
+		type: 'string',
+		value: 'Normal',
+		options: ['Low', 'Normal', 'High', 'Urgent'],
+		description: 'How urgent the task is.'
+	},
 	schedule_start: {
 		type: 'string',
 		description: 'When the task starts. Null starts on take.'
 	},
-	schedule_repeat: {
+	schedule_end: {
 		type: 'string',
-		value: 'none',
-		options: ['none', 'hourly', 'daily', 'weekly'],
-		description: 'How often the task repeats after its start.'
+		description: 'When the task is due. Null means no deadline.'
 	},
 	questions: {
 		type: 'array',

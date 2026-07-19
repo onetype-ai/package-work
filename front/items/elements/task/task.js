@@ -23,8 +23,9 @@ onetype.AddonReady('elements', (elements) =>
 					locked_at: 'Jul 19, 14:02',
 					working_since: '',
 					worked: 8460,
+					priority: 'High',
 					schedule_start: '',
-					schedule_repeat: 'none',
+					schedule_end: '',
 					questions: [
 						{ id: 1, author: { type: 'agent', id: 'orah', name: 'Orah' }, text: 'Should a card dropped into Done also release the lock, or does release stay an explicit action?', answer: '', created_at: 'Jul 19, 15:12' }
 					],
@@ -101,6 +102,7 @@ onetype.AddonReady('elements', (elements) =>
 				{ label: 'Status', value: this.task.status, type: 'status', color: this.color() },
 				{ label: 'Author', value: this.task.author ? this.task.author.name : null, type: 'person' },
 				{ label: 'Assignee', value: this.task.assignee ? this.task.assignee.name : null, type: 'person', color: this.task.assignee && this.task.assignee.type === 'agent' ? 'green' : 'brand' },
+				{ label: 'Priority', value: this.task.priority, type: 'status', color: this.task.priority === 'Urgent' ? 'red' : (this.task.priority === 'High' ? 'orange' : (this.task.priority === 'Low' ? 'blue' : 'brand')) },
 				{ label: 'Board', value: this.task.board, type: 'chips' },
 				{ label: 'Created', value: this.task.created_at, type: 'date' },
 				{ label: 'Time worked', value: this.task.worked ? this.elapsed() : (this.task.working_since ? this.elapsed() : null), type: 'mono', icon: 'timer' }
@@ -160,16 +162,16 @@ onetype.AddonReady('elements', (elements) =>
 				onClick: () => this.assign(agent)
 			}));
 
-			this.repeatOptions = [
-				{ value: 'none', label: 'Once', icon: 'looks_one' },
-				{ value: 'hourly', label: 'Hourly', icon: 'schedule' },
-				{ value: 'daily', label: 'Daily', icon: 'today' },
-				{ value: 'weekly', label: 'Weekly', icon: 'date_range' }
+			this.priorityOptions = [
+				{ value: 'Low', label: 'Low', icon: 'stat_minus_1' },
+				{ value: 'Normal', label: 'Normal', icon: 'equal' },
+				{ value: 'High', label: 'High', icon: 'stat_1' },
+				{ value: 'Urgent', label: 'Urgent', icon: 'local_fire_department' }
 			];
 
-			this.repeat = () => ({ value }) =>
+			this.prioritize = () => ({ value }) =>
 			{
-				this.change({ ...this.task, schedule_repeat: value });
+				this.change({ ...this.task, priority: value });
 			};
 
 			this.start = () => ({ value }) =>
@@ -177,19 +179,18 @@ onetype.AddonReady('elements', (elements) =>
 				this.change({ ...this.task, schedule_start: value });
 			};
 
+			this.end = () => ({ value }) =>
+			{
+				this.change({ ...this.task, schedule_end: value });
+			};
+
 			this.plan = () =>
 			{
 				const start = this.task.schedule_start ? new Date(this.task.schedule_start).toLocaleDateString() : '';
-				const repeat = this.task.schedule_repeat;
-
-				if(!start && repeat === 'none')
-				{
-					return 'Starts when someone takes it, runs once.';
-				}
-
+				const end = this.task.schedule_end ? new Date(this.task.schedule_end).toLocaleDateString() : '';
 				const opening = start ? 'Starts ' + start : 'Starts when someone takes it';
 
-				return repeat === 'none' ? opening + ', runs once.' : opening + ', repeats ' + repeat + '.';
+				return end ? opening + ', due ' + end + '.' : opening + ', no deadline.';
 			};
 
 			this.pick = () => ({ value }) =>
@@ -435,10 +436,12 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div ot-if="tab === 'schedule'" class="body">
+						<span class="group">Priority</span>
+						<e-form-options :value="task.priority" :options="priorityOptions" :background="above()" :_change="prioritize()"></e-form-options>
 						<span class="group">Starts</span>
 						<e-form-date :value="task.schedule_start" :background="above()" :_change="start()"></e-form-date>
-						<span class="group">Repeats</span>
-						<e-form-options :value="task.schedule_repeat" :options="repeatOptions" :background="above()" :_change="repeat()"></e-form-options>
+						<span class="group">Ends</span>
+						<e-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-form-date>
 						<e-global-notice title="Schedule" :text="plan()" icon="event_upcoming" color="blue" :background="above()"></e-global-notice>
 					</div>
 
