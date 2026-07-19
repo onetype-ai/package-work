@@ -73,6 +73,11 @@ onetype.AddonReady('elements', (elements) =>
 				{ id: 'comments', label: 'Comments', icon: 'forum', count: this.task.comments.length }
 			];
 
+			this.switch = () => ({ value }) =>
+			{
+				this.tab = value;
+			};
+
 			this.change = (task) =>
 			{
 				this.task = task;
@@ -182,7 +187,7 @@ onetype.AddonReady('elements', (elements) =>
 					</div>
 
 					<div class="tabs">
-						<e-navigation-tabs :items="tabs()" :active="tab" :_change="({ value }) => tab = value"></e-navigation-tabs>
+						<e-navigation-tabs :items="tabs()" :active="tab" tone="segmented" :stretch="true" :background="1" :_change="switch()"></e-navigation-tabs>
 					</div>
 
 					<div ot-if="tab === 'overview'" class="body">
