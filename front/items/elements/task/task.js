@@ -127,11 +127,19 @@ onetype.AddonReady('elements', (elements) =>
 
 			this.assigned = (person) => this.task.assignee ? this.task.assignee.type === person.type && this.task.assignee.id === person.id : false;
 
-			this.assign = (person) =>
+			this.assign = async (person) =>
 			{
+				const removing = this.assigned(person);
+				const confirmed = await $ot.float.confirm(removing ? 'Unassign?' : 'Assign the task?', removing ? person.name + ' steps away and the task is up for grabs again.' : 'The task becomes ' + person.name + "'s responsibility.");
+
+				if(!confirmed)
+				{
+					return;
+				}
+
 				this.change({
 					...this.task,
-					assignee: this.assigned(person) ? null : { type: person.type, id: person.id, name: person.name }
+					assignee: removing ? null : { type: person.type, id: person.id, name: person.name }
 				});
 			};
 
