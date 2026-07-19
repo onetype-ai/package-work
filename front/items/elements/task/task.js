@@ -199,8 +199,15 @@ onetype.AddonReady('elements', (elements) =>
 				}
 			};
 
-			this.take = () =>
+			this.take = async () =>
 			{
+				const confirmed = await $ot.float.confirm('Take this task?', 'You become the assignee, the task locks to you and the clock starts.');
+
+				if(!confirmed)
+				{
+					return;
+				}
+
 				const now = new Date();
 
 				this.change({
@@ -231,13 +238,32 @@ onetype.AddonReady('elements', (elements) =>
 
 			this.finished = () => this.task.status === this.final();
 
-			this.move = () => ({ value }) =>
+			this.move = () => async ({ value }) =>
 			{
+				if(value === this.task.status)
+				{
+					return;
+				}
+
+				const confirmed = await $ot.float.confirm('Move the task?', 'The task moves from ' + this.task.status + ' to ' + value + '.');
+
+				if(!confirmed)
+				{
+					return;
+				}
+
 				this.change({ ...this.task, status: value });
 			};
 
-			this.complete = () =>
+			this.complete = async () =>
 			{
+				const confirmed = await $ot.float.confirm('Complete the task?', 'The task lands in ' + this.final() + ', the lock releases and the clock stops.');
+
+				if(!confirmed)
+				{
+					return;
+				}
+
 				const since = this.task.working_since ? new Date(this.task.working_since).getTime() : null;
 
 				this.change({
@@ -352,12 +378,12 @@ onetype.AddonReady('elements', (elements) =>
 					<div class="actions">
 						<e-form-button ot-if="!task.working_since && !finished()" text="Take this task" icon="front_hand" color="brand" :_click="() => take()"></e-form-button>
 						<e-form-button ot-if="task.working_since" text="Release" icon="outbound" color="green" tone="soft" :_click="() => release()"></e-form-button>
-						<e-form-button ot-if="!finished()" text="Complete" icon="check_circle" color="green" :_click="() => complete()"></e-form-button>
 						<div class="status">
 							<e-form-select :value="task.status" :options="statuses()" :searchable="false" :background="above()" :_change="move()"></e-form-select>
 						</div>
 						<span ot-if="task.worked || task.working_since" class="worked" :ot-tooltip="'Time worked in total'"><i>timer</i>{{ elapsed() }}</span>
-						<e-form-button text="" icon="delete" color="red" tone="ghost" :_click="() => remove()"></e-form-button>
+						<e-form-button ot-if="!finished()" text="" icon="check_circle" color="green" tone="ghost" :ot-tooltip="'Complete the task'" :_click="() => complete()"></e-form-button>
+						<e-form-button text="" icon="delete" color="red" tone="ghost" :ot-tooltip="'Delete the task'" :_click="() => remove()"></e-form-button>
 					</div>
 
 					<div class="tabs">
