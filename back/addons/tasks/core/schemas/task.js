@@ -83,6 +83,11 @@ onetype.DataSchema('work.task', {
 		},
 		description: 'Comments on the task, oldest first.'
 	},
+	questionsOpen: {
+		type: 'number',
+		value: 0,
+		description: 'How many questions on the task still wait for an answer.'
+	},
 	created_at: {
 		type: 'string',
 		description: 'Timestamp of when the task was created.'
