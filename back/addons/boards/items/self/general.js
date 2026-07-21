@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.AddonReady('work.boards', (boards) =>
 {
 	boards.Item({

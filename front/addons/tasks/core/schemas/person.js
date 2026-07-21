@@ -1,4 +1,4 @@
-onetype.DataSchema('work.person', {
+onetype.SchemasRegister('work.person', {
 	type: {
 		type: 'string',
 		value: 'user',

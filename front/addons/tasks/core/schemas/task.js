@@ -1,4 +1,4 @@
-onetype.DataSchema('work.task', {
+onetype.SchemasRegister('work.task', {
 	id: {
 		type: 'string|number',
 		description: 'Unique task identifier.'

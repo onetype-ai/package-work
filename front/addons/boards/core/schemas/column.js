@@ -1,4 +1,4 @@
-onetype.DataSchema('work.column', {
+onetype.SchemasRegister('work.column', {
 	value: {
 		type: 'string',
 		required: true,

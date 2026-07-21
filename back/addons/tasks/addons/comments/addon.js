@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.AddonReady('work.tasks', (tasks) =>
 {
 	tasks.comments = onetype.Addon('work.tasks.comments', (addon) =>

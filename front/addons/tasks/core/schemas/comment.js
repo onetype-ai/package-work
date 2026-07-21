@@ -1,4 +1,4 @@
-onetype.DataSchema('work.comment', {
+onetype.SchemasRegister('work.comment', {
 	id: {
 		type: 'string|number',
 		description: 'Unique comment identifier.'

@@ -2,7 +2,7 @@ onetype.AddonReady('work.tasks', (tasks) =>
 {
 	tasks.Fn('open', function(given)
 	{
-		const task = onetype.DataDefine({ created_at: given.date, ...given }, onetype.DataSchema('work.task'));
+		const task = onetype.DataDefine({ created_at: given.date, ...given }, onetype.SchemasGet('work.task'));
 
 		return $ot.float.drawer({
 			id: 'work-task-' + task.id,

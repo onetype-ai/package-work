@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('work.tasks.complete', {
 	description: 'A task was completed and landed in the final column.',
 	metadata: { addon: 'work.tasks' },

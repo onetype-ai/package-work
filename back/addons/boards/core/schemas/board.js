@@ -1,6 +1,4 @@
-import onetype from '@onetype/framework';
-
-onetype.DataSchema('work.board', {
+onetype.SchemasRegister('work.board', {
 	slug: {
 		type: 'string',
 		description: 'Unique board slug everything references.'

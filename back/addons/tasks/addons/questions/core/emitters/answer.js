@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('work.tasks.answer', {
 	description: 'A question on a task was answered.',
 	metadata: { addon: 'work.tasks.questions' },

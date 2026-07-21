@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 /*
 	The work commands as agent tools. Each tool runs its command directly
 	— one door for humans over HTTP and agents over tools, exactly as the

@@ -1,6 +1,4 @@
-import onetype from '@onetype/framework';
-
-onetype.DataSchema('work.question', {
+onetype.SchemasRegister('work.question', {
 	id: {
 		type: 'string|number',
 		description: 'Unique question identifier.'

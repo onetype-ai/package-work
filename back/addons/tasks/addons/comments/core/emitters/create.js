@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('work.tasks.comment', {
 	description: 'A comment was added to a task.',
 	metadata: { addon: 'work.tasks.comments' },

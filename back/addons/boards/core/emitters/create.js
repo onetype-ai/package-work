@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('work.boards.create', {
 	description: 'A board was created.',
 	metadata: { addon: 'work.boards' },

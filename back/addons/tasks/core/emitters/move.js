@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('work.tasks.move', {
 	description: 'A task moved to another column.',
 	metadata: { addon: 'work.tasks' },

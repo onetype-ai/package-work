@@ -1,5 +1,3 @@
-import onetype from '@onetype/framework';
-
 onetype.EmitRegister('work.tasks.update', {
 	description: 'Fields of a task changed.',
 	metadata: { addon: 'work.tasks' },
