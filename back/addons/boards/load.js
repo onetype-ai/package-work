@@ -1,11 +1,11 @@
 import '#work/addons/boards/addon.js';
 
 /* Core */
-import '#work/addons/boards/core/schemas/column.js';
-import '#work/addons/boards/core/schemas/board.js';
-import '#work/addons/boards/core/emitters/create.js';
-import '#work/addons/boards/core/emitters/update.js';
-import '#work/addons/boards/core/emitters/delete.js';
+import '#work/addons/boards/_/schemas/column.js';
+import '#work/addons/boards/_/schemas/board.js';
+import '#work/addons/boards/_/emitters/create.js';
+import '#work/addons/boards/_/emitters/update.js';
+import '#work/addons/boards/_/emitters/delete.js';
 
 /* Functions */
 import '#work/addons/boards/functions/sync.js';

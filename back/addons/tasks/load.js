@@ -1,16 +1,16 @@
 import '#work/addons/tasks/addon.js';
 
 /* Core */
-import '#work/addons/tasks/core/schemas/person.js';
-import '#work/addons/tasks/core/schemas/comment.js';
-import '#work/addons/tasks/core/schemas/question.js';
-import '#work/addons/tasks/core/schemas/task.js';
-import '#work/addons/tasks/core/emitters/create.js';
-import '#work/addons/tasks/core/emitters/update.js';
-import '#work/addons/tasks/core/emitters/delete.js';
-import '#work/addons/tasks/core/emitters/move.js';
-import '#work/addons/tasks/core/emitters/assign.js';
-import '#work/addons/tasks/core/emitters/complete.js';
+import '#work/addons/tasks/_/schemas/person.js';
+import '#work/addons/tasks/_/schemas/comment.js';
+import '#work/addons/tasks/_/schemas/question.js';
+import '#work/addons/tasks/_/schemas/task.js';
+import '#work/addons/tasks/_/emitters/create.js';
+import '#work/addons/tasks/_/emitters/update.js';
+import '#work/addons/tasks/_/emitters/delete.js';
+import '#work/addons/tasks/_/emitters/move.js';
+import '#work/addons/tasks/_/emitters/assign.js';
+import '#work/addons/tasks/_/emitters/complete.js';
 
 /* Functions */
 import '#work/addons/tasks/functions/get.js';
