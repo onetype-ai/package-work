@@ -1,17 +1,17 @@
 onetype.AddonReady('work.boards', (boards) =>
 {
-	boards.Fn('sync', async function()
-	{
-		const { data, message, code } = await $ot.command('work:boards:many', {}, true);
+    boards.Fn('sync', async function()
+    {
+        const { data, message, code } = await $ot.command('work:boards:many', {}, true);
 
-		if(code !== 200)
-		{
-			throw onetype.Error(code, message);
-		}
+        if(code !== 200)
+        {
+            throw onetype.Error(code, message);
+        }
 
-		this.ItemsRemove(false);
-		this.ItemsAdd(data.boards);
+        this.ItemsRemove(false);
+        this.ItemsAdd(data.boards);
 
-		return data.boards;
-	});
+        return data.boards;
+    });
 });

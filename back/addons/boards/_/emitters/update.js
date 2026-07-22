@@ -1,11 +1,11 @@
 onetype.EmitRegister('work.boards.update', {
-	description: 'A board was updated.',
-	metadata: { addon: 'work.boards' },
-	config: {
-		board: {
-			type: 'object',
-			config: 'work.board',
-			description: 'The board after the change.'
-		}
-	}
+    description: 'A board was updated.',
+    metadata: { addon: 'work.boards' },
+    config: {
+        board: {
+            type: 'object',
+            config: 'work.board',
+            description: 'The board after the change.'
+        }
+    }
 });
