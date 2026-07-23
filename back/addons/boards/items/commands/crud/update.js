@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -86,7 +86,7 @@ commands.Item({
             isSystem: false
         };
 
-        onetype.Emit('work.boards.update', { board });
+        onetype.emitters.fire('work.boards.update', { board });
 
         resolve(board, 'Board ' + board.name + ' was updated.');
     }

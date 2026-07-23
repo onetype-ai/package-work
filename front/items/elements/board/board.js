@@ -147,13 +147,13 @@ onetype.AddonReady('elements', (elements) =>
             return /* html */ `
                 <div ot-if="columns().length" class="split">
                     <div class="side">
-                        <e-data-filters :groups="groups()" :background="1" :_change="filter()"></e-data-filters>
+                        <e-admin-data-filters :groups="groups()" :background="1" :_change="filter()"></e-admin-data-filters>
                     </div>
                     <div class="main">
-                        <e-views-board :field="'status'" :columns="columns()" :items="cards()" :background="2" :_open="open()" :_create="create()"></e-views-board>
+                        <e-admin-views-board :field="'status'" :columns="columns()" :items="cards()" :background="2" :_open="open()" :_create="create()"></e-admin-views-board>
                     </div>
                 </div>
-                <e-status-error ot-if="!columns().length" icon="view_kanban" title="Board is not configured" :description="'Board ' + board + ' has no columns declared, so there is nothing to draw. Give it columns to bring it to life.'" :background="0"></e-status-error>
+                <e-admin-status-error ot-if="!columns().length" icon="view_kanban" title="Board is not configured" :description="'Board ' + board + ' has no columns declared, so there is nothing to draw. Give it columns to bring it to life.'" :background="0"></e-admin-status-error>
             `;
         }
     });

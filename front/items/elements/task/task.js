@@ -393,58 +393,58 @@ onetype.AddonReady('elements', (elements) =>
                     </div>
 
                     <div class="actions">
-                        <e-form-button ot-if="!task.working_since && !finished()" text="Take this task" icon="front_hand" color="brand" :_click="() => take()"></e-form-button>
-                        <e-form-button ot-if="task.working_since" text="Release" icon="outbound" color="green" tone="soft" :_click="() => release()"></e-form-button>
+                        <e-admin-form-button ot-if="!task.working_since && !finished()" text="Take this task" icon="front_hand" color="brand" :_click="() => take()"></e-admin-form-button>
+                        <e-admin-form-button ot-if="task.working_since" text="Release" icon="outbound" color="green" tone="soft" :_click="() => release()"></e-admin-form-button>
                         <div class="status">
-                            <e-form-select :value="task.status" :options="statuses()" :searchable="false" :background="above()" :_change="move()"></e-form-select>
+                            <e-admin-form-select :value="task.status" :options="statuses()" :searchable="false" :background="above()" :_change="move()"></e-admin-form-select>
                         </div>
                         <span ot-if="task.worked || task.working_since" class="worked" :ot-tooltip="'Time worked in total'"><i>timer</i>{{ elapsed() }}</span>
-                        <e-form-button ot-if="!finished()" text="" icon="check_circle" color="green" tone="ghost" :ot-tooltip="'Complete the task'" :_click="() => complete()"></e-form-button>
-                        <e-form-button text="" icon="delete" color="red" tone="ghost" :ot-tooltip="'Delete the task'" :_click="() => remove()"></e-form-button>
+                        <e-admin-form-button ot-if="!finished()" text="" icon="check_circle" color="green" tone="ghost" :ot-tooltip="'Complete the task'" :_click="() => complete()"></e-admin-form-button>
+                        <e-admin-form-button text="" icon="delete" color="red" tone="ghost" :ot-tooltip="'Delete the task'" :_click="() => remove()"></e-admin-form-button>
                     </div>
 
                     <div class="tabs">
-                        <e-navigation-tabs :items="tabs()" :active="tab" tone="segmented" :background="above()" :_change="pick()"></e-navigation-tabs>
+                        <e-admin-navigation-tabs :items="tabs()" :active="tab" tone="segmented" :background="above()" :_change="pick()"></e-admin-navigation-tabs>
                     </div>
 
                     <div ot-if="tab === 'overview'" class="body overview">
                         <div class="scroll">
-                            <e-data-thread ot-if="openEntries().length" :entries="openEntries()" color="orange" waiting="Waiting for an answer" replyPlaceholder="Answer the question and unblock the work..." :background="background" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
+                            <e-admin-data-thread ot-if="openEntries().length" :entries="openEntries()" color="orange" waiting="Waiting for an answer" replyPlaceholder="Answer the question and unblock the work..." :background="background" :_reply="({ id, value }) => respond(id, value)"></e-admin-data-thread>
 
-                            <e-global-markdown :content="task.description" :background="0"></e-global-markdown>
+                            <e-admin-global-markdown :content="task.description" :background="0"></e-admin-global-markdown>
                         </div>
 
-                        <e-data-details :items="details()" :background="above()"></e-data-details>
+                        <e-admin-data-details :items="details()" :background="above()"></e-admin-data-details>
                     </div>
 
                     <div ot-if="tab === 'settings'" class="body">
                         <div class="scroll">
                             <span class="group">Priority</span>
-                            <e-form-options :value="task.priority" :options="priorityOptions" :background="above()" :_change="prioritize()"></e-form-options>
+                            <e-admin-form-options :value="task.priority" :options="priorityOptions" :background="above()" :_change="prioritize()"></e-admin-form-options>
                             <div class="dates">
                                 <div class="date">
                                     <span class="group">Starts</span>
-                                    <e-form-date :value="task.schedule_start" :background="above()" :_change="start()"></e-form-date>
+                                    <e-admin-form-date :value="task.schedule_start" :background="above()" :_change="start()"></e-admin-form-date>
                                 </div>
                                 <div class="date">
                                     <span class="group">Ends</span>
-                                    <e-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-form-date>
+                                    <e-admin-form-date :value="task.schedule_end" :background="above()" :_change="end()"></e-admin-form-date>
                                 </div>
                             </div>
                             <span class="group">People</span>
-                            <e-data-list :rows="peopleRows()" :search="true" placeholder="Find a person..." :background="above()"></e-data-list>
+                            <e-admin-data-list :rows="peopleRows()" :search="true" placeholder="Find a person..." :background="above()"></e-admin-data-list>
                             <span class="group">Agents</span>
-                            <e-data-list :rows="agentRows()" :search="true" placeholder="Find an agent..." :background="above()"></e-data-list>
+                            <e-admin-data-list :rows="agentRows()" :search="true" placeholder="Find an agent..." :background="above()"></e-admin-data-list>
                         </div>
-                        <e-global-notice title="Schedule" :text="plan()" icon="event_upcoming" color="blue" :background="above()"></e-global-notice>
+                        <e-admin-global-notice title="Schedule" :text="plan()" icon="event_upcoming" color="blue" :background="above()"></e-admin-global-notice>
                     </div>
 
                     <div ot-if="tab === 'questions'" class="body">
-                        <e-data-thread :entries="questionEntries()" color="orange" waiting="Waiting for an answer" placeholder="Ask a question..." replyPlaceholder="Answer and unblock the work..." emptyIcon="contact_support" emptyTitle="No questions yet" emptyDescription="When the work hits a wall, ask below." :background="background" :_send="({ value }) => ask(value)" :_reply="({ id, value }) => respond(id, value)"></e-data-thread>
+                        <e-admin-data-thread :entries="questionEntries()" color="orange" waiting="Waiting for an answer" placeholder="Ask a question..." replyPlaceholder="Answer and unblock the work..." emptyIcon="contact_support" emptyTitle="No questions yet" emptyDescription="When the work hits a wall, ask below." :background="background" :_send="({ value }) => ask(value)" :_reply="({ id, value }) => respond(id, value)"></e-admin-data-thread>
                     </div>
 
                     <div ot-if="tab === 'comments'" class="body">
-                        <e-data-thread :entries="commentEntries()" placeholder="Write a comment..." emptyIcon="forum" emptyTitle="No comments yet" emptyDescription="Say the first word below." :background="background" :_send="({ value }) => comment(value)"></e-data-thread>
+                        <e-admin-data-thread :entries="commentEntries()" placeholder="Write a comment..." emptyIcon="forum" emptyTitle="No comments yet" emptyDescription="Say the first word below." :background="background" :_send="({ value }) => comment(value)"></e-admin-data-thread>
                     </div>
                 </div>
             `;

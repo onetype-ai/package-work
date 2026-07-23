@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -65,7 +65,7 @@ commands.Item({
             created_at: row.Get('created_at')
         };
 
-        onetype.Emit('work.tasks.answer', { task: String(row.Get('task_id')), question });
+        onetype.emitters.fire('work.tasks.answer', { task: String(row.Get('task_id')), question });
 
         resolve(question, 'Question answered.');
     }

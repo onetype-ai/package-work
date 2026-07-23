@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -47,7 +47,7 @@ commands.Item({
     out: 'work.board',
     callback: async function(properties, resolve)
     {
-        const slug = properties.slug ? properties.slug : onetype.StringSlugify(properties.name);
+        const slug = properties.slug ? properties.slug : onetype.string.slugify(properties.name);
 
         if(work.boards.Fn('get', slug))
         {
@@ -76,7 +76,7 @@ commands.Item({
             isSystem: false
         };
 
-        onetype.Emit('work.boards.create', { board });
+        onetype.emitters.fire('work.boards.create', { board });
 
         resolve(board, 'Board ' + board.name + ' was created.');
     }

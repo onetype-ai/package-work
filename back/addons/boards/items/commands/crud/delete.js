@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -59,7 +59,7 @@ commands.Item({
             }
         }
 
-        onetype.Emit('work.boards.delete', { board });
+        onetype.emitters.fire('work.boards.delete', { board });
 
         resolve(board, 'Board ' + board.name + ' is deleted.');
     }

@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -58,7 +58,7 @@ commands.Item({
 
         const task = await work.tasks.Fn('serialize', item);
 
-        onetype.Emit('work.tasks.assign', { task });
+        onetype.emitters.fire('work.tasks.assign', { task });
 
         resolve(task, task.assignee
             ? 'Task ' + task.title + ' is now assigned to ' + task.assignee.name + '.'

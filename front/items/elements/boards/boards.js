@@ -59,8 +59,8 @@ onetype.AddonReady('elements', (elements) =>
 
             return /* html */ `
                 <div class="box">
-                    <e-navigation-tabs :items="boards()" :active="active" tone="contained" :background="1" :_change="pick()"></e-navigation-tabs>
-                    <e-form-button text="" icon="add" color="brand" tone="ghost" :ot-tooltip="'Create a board'" :_click="() => add()"></e-form-button>
+                    <e-admin-navigation-tabs :items="boards()" :active="active" tone="contained" :background="1" :_change="pick()"></e-admin-navigation-tabs>
+                    <e-admin-form-button text="" icon="add" color="brand" tone="ghost" :ot-tooltip="'Create a board'" :_click="() => add()"></e-admin-form-button>
                 </div>
             `;
         }

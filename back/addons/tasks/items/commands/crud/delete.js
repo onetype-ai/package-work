@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -42,7 +42,7 @@ commands.Item({
 
         await item.Update();
 
-        onetype.Emit('work.tasks.delete', { id: String(item.Get('id')) });
+        onetype.emitters.fire('work.tasks.delete', { id: String(item.Get('id')) });
 
         resolve({ id: String(item.Get('id')) }, 'Task ' + item.Get('title') + ' was deleted.');
     }

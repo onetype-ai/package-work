@@ -1,4 +1,4 @@
-import users from '@onetype/platform/users';
+import platform from '@onetype/platform/addon';
 import work from '#work/addon.js';
 
 /*
@@ -18,7 +18,7 @@ work.tasks.Fn('person', async function(user_id, agent)
 
     if(user_id)
     {
-        const user = await users.Find().filter('id', user_id).one();
+        const user = await platform.users.Find().filter('id', user_id).one();
 
         return { type: 'user', id: String(user_id), name: user ? user.Get('name') || user.Get('email') : 'User ' + user_id };
     }

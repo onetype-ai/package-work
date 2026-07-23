@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -56,7 +56,7 @@ commands.Item({
             created_at: row.Get('created_at')
         };
 
-        onetype.Emit('work.tasks.comment', { task: String(item.Get('id')), comment });
+        onetype.emitters.fire('work.tasks.comment', { task: String(item.Get('id')), comment });
 
         resolve(comment, 'Comment added to ' + item.Get('title') + '.');
     }

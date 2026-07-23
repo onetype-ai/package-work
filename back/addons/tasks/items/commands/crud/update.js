@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -64,7 +64,7 @@ commands.Item({
 
         const task = await work.tasks.Fn('serialize', item);
 
-        onetype.Emit('work.tasks.update', { task });
+        onetype.emitters.fire('work.tasks.update', { task });
 
         resolve(task, 'Task ' + task.title + ' was updated.');
     }

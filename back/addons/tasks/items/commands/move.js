@@ -1,4 +1,4 @@
-import commands from '@onetype/framework/commands';
+import commands from 'addon-commands';
 import work from '#work/addon.js';
 
 commands.Item({
@@ -59,7 +59,7 @@ commands.Item({
 
         const task = await work.tasks.Fn('serialize', item);
 
-        onetype.Emit('work.tasks.move', { task, from, to: properties.status });
+        onetype.emitters.fire('work.tasks.move', { task, from, to: properties.status });
 
         resolve(task, 'Task ' + task.title + ' moved from ' + from + ' to ' + properties.status + '.');
     }

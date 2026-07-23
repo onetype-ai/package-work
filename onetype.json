@@ -1,12 +1,11 @@
 {
 	"slug": "onetype/work",
 	"name": "Work",
-	"description": "The work layer of the instance. Tasks that humans and agents create, pick up and complete — one board, every worker.",
+	"description": "The work layer of the instance. Tasks that humans and agents create, pick up and complete \u2014 one board, every worker.",
 	"icon": "view_kanban",
 	"color": "rgba(251, 146, 60, 1)",
 	"status": "disabled",
 	"depends": [
-		"onetype/elements",
 		"onetype/admin"
 	],
 	"runtimes": [

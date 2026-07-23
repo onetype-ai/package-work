@@ -1,16 +1,8 @@
 import '#work/addons/tasks/addon.js';
-
-/* Core */
-import '#work/addons/tasks/_/schemas/person.js';
-import '#work/addons/tasks/_/schemas/comment.js';
-import '#work/addons/tasks/_/schemas/question.js';
-import '#work/addons/tasks/_/schemas/task.js';
-import '#work/addons/tasks/_/emitters/create.js';
-import '#work/addons/tasks/_/emitters/update.js';
-import '#work/addons/tasks/_/emitters/delete.js';
-import '#work/addons/tasks/_/emitters/move.js';
-import '#work/addons/tasks/_/emitters/assign.js';
-import '#work/addons/tasks/_/emitters/complete.js';
+import '#work/addons/tasks/items/onetype-schemas/work.person.js';
+import '#work/addons/tasks/items/onetype-schemas/work.comment.js';
+import '#work/addons/tasks/items/onetype-schemas/work.question.js';
+import '#work/addons/tasks/items/onetype-schemas/work.task.js';
 
 /* Functions */
 import '#work/addons/tasks/functions/get.js';
@@ -27,6 +19,12 @@ import '#work/addons/tasks/items/commands/crud/many.js';
 import '#work/addons/tasks/items/commands/move.js';
 import '#work/addons/tasks/items/commands/assign.js';
 import '#work/addons/tasks/items/commands/complete.js';
+import '#work/addons/tasks/items/onetype-emitters/work.tasks.create.js';
+import '#work/addons/tasks/items/onetype-emitters/work.tasks.update.js';
+import '#work/addons/tasks/items/onetype-emitters/work.tasks.delete.js';
+import '#work/addons/tasks/items/onetype-emitters/work.tasks.move.js';
+import '#work/addons/tasks/items/onetype-emitters/work.tasks.assign.js';
+import '#work/addons/tasks/items/onetype-emitters/work.tasks.complete.js';
 
 /* Addons */
 import '#work/addons/tasks/addons/comments/load.js';
